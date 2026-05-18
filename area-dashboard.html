@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Area Dashboard | Young Life Front Range Region</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --yl-navy: #1a2f4e; --yl-green: #6ab42b; --yl-green-dark: #4e8a1a; --yl-light: #f5f7f2; --yl-gray: #6b7280; --yl-border: #dde8d0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Source Sans 3", sans-serif; background: var(--yl-light); color: var(--yl-navy); min-height: 100vh; }
+  nav { background: var(--yl-navy); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(26,47,78,0.25); }
+  .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-dot { width: 32px; height: 32px; background: var(--yl-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: "Playfair Display", serif; font-weight: 900; color: white; font-size: 14px; }
+  .nav-title { color: white; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.2; }
+  .nav-sub { color: var(--yl-green); font-weight: 300; font-size: 0.72rem; display: block; }
+  nav a.nav-link { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  nav a.nav-link:hover { color: var(--yl-green); border-bottom-color: var(--yl-green); }
+  .nav-links { display: flex; gap: 2rem; }
+  .page-hero { background: linear-gradient(135deg, var(--yl-navy) 0%, #243d5e 100%); padding: 56px 2rem 48px; }
+  .page-hero .breadcrumb { color: rgba(255,255,255,0.45); font-size: 0.78rem; margin-bottom: 14px; }
+  .page-hero .breadcrumb a { color: var(--yl-green); text-decoration: none; }
+  .page-hero .section-tag { display: inline-block; background: rgba(106,180,43,0.15); border: 1px solid rgba(106,180,43,0.3); color: var(--yl-green); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 16px; }
+  .page-hero h1 { font-family: "Playfair Display", serif; font-size: clamp(1.8rem, 4vw, 2.8rem); color: white; line-height: 1.15; max-width: 700px; }
+  .page-hero p { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 620px; margin-top: 14px; line-height: 1.7; font-weight: 300; }
+  main { max-width: 900px; margin: 0 auto; padding: 56px 2rem 80px; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--yl-green-dark); font-size: 0.85rem; font-weight: 700; text-decoration: none; margin-bottom: 32px; letter-spacing: 0.04em; }
+  .back-link:hover { color: var(--yl-green); }
+
+  /* DOWNLOAD BANNER */
+  .download-banner { background: var(--yl-navy); border-radius: 16px; padding: 24px 28px; display: flex; align-items: center; gap: 20px; margin-bottom: 28px; flex-wrap: wrap; }
+  .download-icon { width: 52px; height: 52px; background: rgba(106,180,43,0.15); border: 1.5px solid rgba(106,180,43,0.35); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; }
+  .download-info { flex: 1; min-width: 200px; }
+  .download-info strong { color: white; font-size: 0.97rem; display: block; margin-bottom: 3px; }
+  .download-info span { color: rgba(255,255,255,0.5); font-size: 0.8rem; }
+  .download-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--yl-green); color: white; text-decoration: none; font-size: 0.85rem; font-weight: 700; padding: 11px 22px; border-radius: 10px; letter-spacing: 0.03em; transition: background 0.18s; white-space: nowrap; }
+  .download-btn:hover { background: var(--yl-green-dark); }
+
+  /* SPREADSHEET PREVIEW */
+  .sheet-preview-wrap { background: #1e6823; border-radius: 16px; padding: 16px; margin-bottom: 28px; box-shadow: 0 4px 24px rgba(0,0,0,0.2); }
+  .sheet-chrome { background: #f1f3f4; border-radius: 10px 10px 0 0; padding: 10px 16px; display: flex; align-items: center; gap: 10px; }
+  .sheet-chrome-dots { display: flex; gap: 6px; }
+  .sheet-chrome-dots span { width: 12px; height: 12px; border-radius: 50%; }
+  .sheet-chrome-dots span:nth-child(1) { background: #ff5f57; }
+  .sheet-chrome-dots span:nth-child(2) { background: #febc2e; }
+  .sheet-chrome-dots span:nth-child(3) { background: #28c840; }
+  .sheet-name { font-size: 0.78rem; font-weight: 600; color: #444; margin-left: 6px; }
+  .sheet-toolbar { background: white; border-bottom: 1px solid #e0e0e0; padding: 6px 12px; display: flex; gap: 8px; align-items: center; }
+  .sheet-toolbar-item { font-size: 0.72rem; color: #555; padding: 3px 8px; border-radius: 4px; cursor: default; }
+  .sheet-toolbar-item:hover { background: #f1f3f4; }
+  .sheet-body { background: white; overflow-x: auto; border-radius: 0 0 8px 8px; }
+  .sheet-tab-bar { background: #f8f9fa; border-top: 1px solid #e0e0e0; padding: 0 8px; display: flex; gap: 2px; }
+  .sheet-tab { font-size: 0.72rem; padding: 6px 16px; color: #444; border-radius: 4px 4px 0 0; cursor: default; }
+  .sheet-tab.active { background: white; color: #1a2f4e; font-weight: 700; border: 1px solid #e0e0e0; border-bottom: none; }
+  /* actual spreadsheet grid */
+  .ss { border-collapse: collapse; width: 100%; font-size: 0.68rem; font-family: Arial, sans-serif; }
+  .ss th { background: #f8f9fa; color: #444; font-weight: 600; padding: 5px 8px; border: 1px solid #e0e0e0; text-align: center; white-space: nowrap; position: sticky; top: 0; }
+  .ss th.section-dm { background: #e8f4d8; color: #2d6a0a; }
+  .ss th.section-ld { background: #dbeafe; color: #1e3a8a; }
+  .ss th.section-rd { background: #fef9c3; color: #713f12; }
+  .ss td { padding: 4px 8px; border: 1px solid #e8e8e8; text-align: center; white-space: nowrap; color: #222; }
+  .ss td.month { font-weight: 700; color: #1a2f4e; background: #f8f9fa; text-align: left; }
+  .ss td.total { background: #f0f4f8; font-weight: 700; color: #1a2f4e; }
+  .ss tr:nth-child(even) td:not(.month):not(.total) { background: #fafafa; }
+  .ss tr:hover td { background: #f0f7e8; }
+  .col-label { font-size: 0.6rem; color: #888; display: block; font-weight: 400; }
+  .row-num { background: #f8f9fa; color: #999; font-size: 0.65rem; padding: 4px 6px; border: 1px solid #e8e8e8; text-align: center; min-width: 24px; }
+
+  /* CONTENT CARDS */
+  .content-card { background: white; border-radius: 16px; border: 1px solid var(--yl-border); padding: 32px 36px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(26,47,78,0.07); }
+  .content-card h2 { font-family: "Playfair Display", serif; font-size: 1.3rem; color: var(--yl-navy); margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--yl-border); }
+  .content-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--yl-navy); margin: 16px 0 7px; }
+  .content-card p { font-size: 0.93rem; color: #374151; line-height: 1.75; margin-bottom: 12px; }
+  .content-card ul { padding-left: 1.4rem; margin-bottom: 12px; }
+  .content-card li { font-size: 0.9rem; color: #374151; line-height: 1.65; margin-bottom: 5px; }
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+  .metric-group { border-radius: 10px; padding: 16px 18px; border: 1px solid var(--yl-border); }
+  .metric-group.dm { background: #f0f9e8; border-color: #c3e3a0; }
+  .metric-group.ld { background: #eff6ff; border-color: #bfdbfe; }
+  .metric-group.rd { background: #fefce8; border-color: #fde68a; }
+  .metric-group h4 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .metric-group.dm h4 { color: #2d6a0a; }
+  .metric-group.ld h4 { color: #1e3a8a; }
+  .metric-group.rd h4 { color: #713f12; }
+  .metric-group ul { padding-left: 1rem; margin: 0; }
+  .metric-group li { font-size: 0.82rem; color: #374151; margin-bottom: 4px; }
+  footer { background: var(--yl-navy); color: rgba(255,255,255,0.5); text-align: center; padding: 32px 2rem; font-size: 0.82rem; line-height: 1.7; }
+  footer strong { color: white; }
+  footer a { color: var(--yl-green); text-decoration: none; }
+  @media (max-width: 720px) { .nav-links { display: none; } .three-col { grid-template-columns: 1fr; } .download-banner { flex-direction: column; } }
+</style>
+<style>
+  .section-dm-cell { background: #f4fced; }
+  .section-ld-cell { background: #f0f6ff; }
+  .section-rd-cell { background: #fffef0; }
+  tr:hover .section-dm-cell { background: #e8f7d8; }
+  tr:hover .section-ld-cell { background: #e4efff; }
+  tr:hover .section-rd-cell { background: #fffbe0; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo-dot">YL</div>
+    <div class="nav-title">Front Range Region<span class="nav-sub">Young Life</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="index.html#action" class="nav-link">90-Day Plan</a>
+    <a href="index.html#important" class="nav-link">Key Docs</a>
+    <a href="index.html#helpful" class="nav-link">Resources</a>
+  </div>
+</nav>
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Area Dashboard</div>
+  <div class="section-tag">Section II &middot; Key Document</div>
+  <h1>Area Dashboard</h1>
+  <p>A monthly tracking spreadsheet for the key health indicators of your Young Life area &mdash; covering direct ministry, leadership development, and resource development. Copy the template and make it your own.</p>
+</div>
+<main>
+<a href="index.html" class="back-link">&larr; Back to Onboarding Home</a>
+
+<!-- DOWNLOAD BANNER -->
+<div class="download-banner">
+  <div class="download-icon">&#x1F4CA;</div>
+  <div class="download-info">
+    <strong>Area Dashboard</strong>
+    <span>Google Sheets &mdash; monthly tracking template &middot; copy &amp; customize for your area</span>
+  </div>
+  <a href="https://docs.google.com/spreadsheets/d/1qSnxUoLQYDIqp6953APrPS9cRhPloSeenYMumoSCL58/edit?usp=drive_link" target="_blank" rel="noopener" class="download-btn">
+    &#x2B07; Open &amp; Copy Template
+  </a>
+</div>
+
+<!-- SPREADSHEET PREVIEW -->
+<div class="sheet-preview-wrap">
+  <div class="sheet-chrome">
+    <div class="sheet-chrome-dots"><span></span><span></span><span></span></div>
+    <span class="sheet-name">&#x1F4CA; Area Dashboard &mdash; Google Sheets</span>
+  </div>
+  <div class="sheet-toolbar">
+    <span class="sheet-toolbar-item">File</span>
+    <span class="sheet-toolbar-item">Edit</span>
+    <span class="sheet-toolbar-item">View</span>
+    <span class="sheet-toolbar-item">Insert</span>
+    <span class="sheet-toolbar-item">Format</span>
+  </div>
+  <div class="sheet-body">
+    <div style="overflow-x:auto; max-height: 380px; overflow-y:auto;">
+    <table class="ss">
+      <thead>
+        <tr>
+          <th style="min-width:20px;"></th>
+          <th style="min-width:52px;">Month</th>
+          <th>Schools</th>
+          <th>Clubs</th>
+          <th>Avg Club Attendance</th>
+          <th class="section-dm" colspan="3">&#x1F7E2; Direct Ministry</th>
+          <th class="section-ld" colspan="3">&#x1F535; Leadership Development</th>
+          <th class="section-rd" colspan="5">&#x1F7E1; Resource Development</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="section-dm"><span class="col-label">Avg Campaigners</span></th>
+          <th class="section-dm"><span class="col-label">Winter Camp Total</span></th>
+          <th class="section-dm"><span class="col-label">% to Campaigners</span></th>
+          <th class="section-ld"><span class="col-label">Total Leaders</span></th>
+          <th class="section-ld"><span class="col-label">Matt 9:38 List</span></th>
+          <th class="section-ld"><span class="col-label">Recruiting Focus</span></th>
+          <th class="section-rd"><span class="col-label">Committee #</span></th>
+          <th class="section-rd"><span class="col-label">Donor Meetings</span></th>
+          <th class="section-rd"><span class="col-label">Commitments</span></th>
+          <th class="section-rd"><span class="col-label">Monthly Giving</span></th>
+          <th class="section-rd"><span class="col-label">YTD Cash</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+      <td class="row-num">2</td>
+      <td class="month">Sep</td>
+      <td>14</td><td>5</td><td>31</td>
+      <td class="section-dm-cell">39</td><td class="section-dm-cell">68</td><td class="section-dm-cell">65%</td>
+      <td class="section-ld-cell">32</td><td class="section-ld-cell">12</td><td class="section-ld-cell">Parents</td>
+      <td class="section-rd-cell">9</td><td class="section-rd-cell">3</td><td class="section-rd-cell">$50/mo</td>
+      <td class="section-rd-cell">$1,200</td><td class="section-rd-cell">$33,000</td>
+    </tr><tr>
+      <td class="row-num">3</td>
+      <td class="month">Oct</td>
+      <td>14</td><td>5</td><td>33</td>
+      <td class="section-dm-cell">34</td><td class="section-dm-cell">68</td><td class="section-dm-cell">63%</td>
+      <td class="section-ld-cell">31</td><td class="section-ld-cell">11</td><td class="section-ld-cell">Alumni</td>
+      <td class="section-rd-cell">9</td><td class="section-rd-cell">1</td><td class="section-rd-cell">&mdash;</td>
+      <td class="section-rd-cell">$1,200</td><td class="section-rd-cell">$27,000</td>
+    </tr><tr>
+      <td class="row-num">4</td>
+      <td class="month">Nov</td>
+      <td>14</td><td>5</td><td>34</td>
+      <td class="section-dm-cell">32</td><td class="section-dm-cell">76</td><td class="section-dm-cell">70%</td>
+      <td class="section-ld-cell">34</td><td class="section-ld-cell">11</td><td class="section-ld-cell">Teachers</td>
+      <td class="section-rd-cell">9</td><td class="section-rd-cell">2</td><td class="section-rd-cell">$1,500</td>
+      <td class="section-rd-cell">$1,300</td><td class="section-rd-cell">$24,000</td>
+    </tr><tr>
+      <td class="row-num">5</td>
+      <td class="month">Dec</td>
+      <td>14</td><td>5</td><td>36</td>
+      <td class="section-dm-cell">45</td><td class="section-dm-cell">76</td><td class="section-dm-cell">70%</td>
+      <td class="section-ld-cell">34</td><td class="section-ld-cell">7</td><td class="section-ld-cell">Ldr Network</td>
+      <td class="section-rd-cell">10</td><td class="section-rd-cell">2</td><td class="section-rd-cell">$4,000</td>
+      <td class="section-rd-cell">$1,450</td><td class="section-rd-cell">$40,000</td>
+    </tr><tr>
+      <td class="row-num">6</td>
+      <td class="month">Jan</td>
+      <td>14</td><td>&mdash;</td><td>&mdash;</td>
+      <td class="section-dm-cell">&mdash;</td><td class="section-dm-cell">&mdash;</td><td class="section-dm-cell">&mdash;</td>
+      <td class="section-ld-cell">&mdash;</td><td class="section-ld-cell">&mdash;</td><td class="section-ld-cell">Comm. Mktg</td>
+      <td class="section-rd-cell">&mdash;</td><td class="section-rd-cell">&mdash;</td><td class="section-rd-cell">&mdash;</td>
+      <td class="section-rd-cell">&mdash;</td><td class="section-rd-cell">&mdash;</td>
+    </tr><tr>
+      <td class="row-num">7</td>
+      <td class="month">Feb&ndash;Aug</td>
+      <td><em>to be filled</em></td><td></td><td></td>
+      <td class="section-dm-cell"></td><td class="section-dm-cell"></td><td class="section-dm-cell"></td>
+      <td class="section-ld-cell"></td><td class="section-ld-cell"></td><td class="section-ld-cell"><em>rotating focus</em></td>
+      <td class="section-rd-cell"></td><td class="section-rd-cell"></td><td class="section-rd-cell"></td>
+      <td class="section-rd-cell"></td><td class="section-rd-cell"></td>
+    </tr>
+        <tr>
+          <td class="row-num">14</td>
+          <td class="month total">EOY Total</td>
+          <td class="total" colspan="14" style="text-align:left;color:var(--yl-gray);font-style:italic;font-size:0.7rem;">
+            &larr; Calculated from monthly rows above
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="sheet-tab-bar">
+      <div class="sheet-tab active">Area Dashboard</div>
+      <div class="sheet-tab">+ Add sheet</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT GETS TRACKED -->
+<div class="content-card">
+  <h2>What the Dashboard Tracks</h2>
+  <p>The Area Dashboard is filled in monthly by the Area Director and reviewed with the committee. It covers three broad areas corresponding to Young Life&rsquo;s Five Core Functions:</p>
+  <div class="three-col">
+    <div class="metric-group dm">
+      <h4>&#x1F7E2; Direct Ministry</h4>
+      <ul>
+        <li>Number of schools in the area</li>
+        <li>Number of clubs running</li>
+        <li>Average club attendance</li>
+        <li>Average Campaigners attendance</li>
+        <li>Winter Camp total &amp; % now in Campaigners</li>
+        <li>Summer Camp deposits &amp; % now in Campaigners</li>
+      </ul>
+    </div>
+    <div class="metric-group ld">
+      <h4>&#x1F535; Leadership Development</h4>
+      <ul>
+        <li>Total number of volunteer leaders</li>
+        <li>Leaders committed to attending camp</li>
+        <li>Matthew 9:38 list size</li>
+        <li>Recruiting focus (rotating monthly)</li>
+        <li>Potential leaders met with this month</li>
+        <li>Leader additions &amp; attrition</li>
+      </ul>
+    </div>
+    <div class="metric-group rd">
+      <h4>&#x1F7E1; Resource Development</h4>
+      <ul>
+        <li>Current committee size</li>
+        <li>Potential committee members met with</li>
+        <li>Committee additions &amp; attrition</li>
+        <li>Number of donor meetings this month</li>
+        <li>Financial commitments from donor meetings</li>
+        <li>Current monthly giving, YTD cash balance, projected year-end</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="content-card">
+  <h2>The Rotating Recruiting Focus</h2>
+  <p>One column the dashboard tracks each month is the <strong>Recruiting Focus</strong> &mdash; the category of people the area is prioritizing for volunteer leader outreach that month. The template cycles through:</p>
+  <ul>
+    <li><strong>Parents</strong> &mdash; parents of current or past students</li>
+    <li><strong>Alumni</strong> &mdash; former Young Life kids now in their 20s&ndash;30s</li>
+    <li><strong>Teachers</strong> &mdash; educators at area schools</li>
+    <li><strong>Current Leader Networking</strong> &mdash; warm referrals from existing leaders</li>
+    <li><strong>Community Marketing</strong> &mdash; broader community outreach and visibility</li>
+    <li><strong>Committee Networking</strong> &mdash; warm referrals through committee relationships</li>
+  </ul>
+  <p>This rotating focus ensures the area builds a diverse, sustainable pipeline of volunteer leaders rather than over-relying on any single source.</p>
+</div>
+
+<div class="content-card">
+  <h2>How to Use This Template</h2>
+  <p>Click <strong>Open &amp; Copy Template</strong> above to open the spreadsheet in Google Sheets. Then:</p>
+  <ul>
+    <li>Select <strong>File &rarr; Make a copy</strong> to create your own editable version</li>
+    <li>Rename it with your area name (e.g. &ldquo;Northside YL Area Dashboard&rdquo;)</li>
+    <li>Update the numbers monthly &mdash; ideally in conversation with your Area Director</li>
+    <li>Share the link with your Area Director so they can view and discuss trends with you</li>
+    <li>Bring a printed or screen-shared version to your monthly committee meetings to review together</li>
+  </ul>
+  <p>The dashboard is most valuable as a trend tool. A single month&rsquo;s numbers matter less than the direction of movement over time &mdash; use it to celebrate growth and identify where the area needs strategic attention.</p>
+</div>
+
+</main>
+<footer><strong>Young Life &middot; Front Range Region</strong><br>New Committee Chair Onboarding &middot; Eastern Colorado &amp; Southern Wyoming<br>Questions? Contact <a href="mailto:kristendawnyl@gmail.com">Kristen Martinez</a> in the Regional Office</footer>
+</body>
+</html>

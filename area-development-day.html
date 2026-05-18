@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Area Development Day | Young Life Front Range Region</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --yl-navy: #1a2f4e; --yl-green: #6ab42b; --yl-green-dark: #4e8a1a; --yl-light: #f5f7f2; --yl-gray: #6b7280; --yl-border: #dde8d0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Source Sans 3", sans-serif; background: var(--yl-light); color: var(--yl-navy); min-height: 100vh; }
+  nav { background: var(--yl-navy); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(26,47,78,0.25); }
+  .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-dot { width: 32px; height: 32px; background: var(--yl-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: "Playfair Display", serif; font-weight: 900; color: white; font-size: 14px; }
+  .nav-title { color: white; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.2; }
+  .nav-sub { color: var(--yl-green); font-weight: 300; font-size: 0.72rem; display: block; }
+  nav a.nav-link { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  nav a.nav-link:hover { color: var(--yl-green); border-bottom-color: var(--yl-green); }
+  .nav-links { display: flex; gap: 2rem; }
+  .page-hero { background: linear-gradient(135deg, var(--yl-navy) 0%, #243d5e 100%); padding: 56px 2rem 48px; }
+  .page-hero .breadcrumb { color: rgba(255,255,255,0.45); font-size: 0.78rem; margin-bottom: 14px; }
+  .page-hero .breadcrumb a { color: var(--yl-green); text-decoration: none; }
+  .page-hero .section-tag { display: inline-block; background: rgba(106,180,43,0.15); border: 1px solid rgba(106,180,43,0.3); color: var(--yl-green); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 16px; }
+  .page-hero h1 { font-family: "Playfair Display", serif; font-size: clamp(1.8rem, 4vw, 2.8rem); color: white; line-height: 1.15; max-width: 700px; }
+  .page-hero p { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 620px; margin-top: 14px; line-height: 1.7; font-weight: 300; }
+  main { max-width: 820px; margin: 0 auto; padding: 56px 2rem 80px; }
+  .content-card { background: white; border-radius: 16px; border: 1px solid var(--yl-border); padding: 36px 40px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(26,47,78,0.07); }
+  .content-card h2 { font-family: "Playfair Display", serif; font-size: 1.4rem; color: var(--yl-navy); margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--yl-border); }
+  .content-card h3 { font-size: 1rem; font-weight: 700; color: var(--yl-navy); margin: 20px 0 8px; }
+  .content-card p { font-size: 0.95rem; color: #374151; line-height: 1.75; margin-bottom: 14px; }
+  .content-card ul, .content-card ol { padding-left: 1.4rem; margin-bottom: 14px; }
+  .content-card li { font-size: 0.93rem; color: #374151; line-height: 1.7; margin-bottom: 6px; }
+  .pullquote { background: var(--yl-navy); color: white; border-radius: 14px; padding: 28px 32px; margin: 24px 0; font-family: "Playfair Display", serif; font-size: 1.15rem; line-height: 1.6; font-style: italic; }
+  .pullquote cite { display: block; margin-top: 12px; font-size: 0.8rem; font-style: normal; color: var(--yl-green); font-family: "Source Sans 3", sans-serif; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+  .timeline-item { display: flex; gap: 20px; margin-bottom: 20px; align-items: flex-start; }
+  .timeline-dot { width: 40px; height: 40px; border-radius: 50%; background: var(--yl-navy); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; flex-shrink: 0; margin-top: 2px; }
+  .timeline-content h4 { font-size: 0.95rem; font-weight: 700; color: var(--yl-navy); margin-bottom: 4px; }
+  .timeline-content p { font-size: 0.88rem; color: #374151; line-height: 1.6; margin: 0; }
+  .timeline-content ul { padding-left: 1.2rem; margin: 6px 0 0; }
+  .timeline-content li { font-size: 0.85rem; color: #374151; margin-bottom: 3px; }
+  .agenda-row { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--yl-border); align-items: flex-start; }
+  .agenda-row:last-child { border-bottom: none; }
+  .agenda-time { font-size: 0.82rem; font-weight: 700; color: var(--yl-green-dark); min-width: 52px; padding-top: 2px; }
+  .agenda-desc h4 { font-size: 0.93rem; font-weight: 700; color: var(--yl-navy); margin-bottom: 3px; }
+  .agenda-desc p { font-size: 0.85rem; color: var(--yl-gray); line-height: 1.55; margin: 0; }
+  .agenda-desc ul { padding-left: 1.1rem; margin: 4px 0 0; }
+  .agenda-desc li { font-size: 0.83rem; color: #374151; margin-bottom: 2px; }
+  .highlight-box { background: var(--yl-light); border-left: 4px solid var(--yl-green); border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 16px 0; }
+  .highlight-box p { font-size: 0.9rem; color: #374151; line-height: 1.65; margin: 0; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--yl-green-dark); font-size: 0.85rem; font-weight: 700; text-decoration: none; margin-bottom: 32px; letter-spacing: 0.04em; }
+  .back-link:hover { color: var(--yl-green); }
+  footer { background: var(--yl-navy); color: rgba(255,255,255,0.5); text-align: center; padding: 32px 2rem; font-size: 0.82rem; line-height: 1.7; }
+  footer strong { color: white; }
+  footer a { color: var(--yl-green); text-decoration: none; }
+  @media (max-width: 720px) { .nav-links { display: none; } .content-card { padding: 24px 20px; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo-dot">YL</div>
+    <div class="nav-title">Front Range Region<span class="nav-sub">Young Life</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="index.html#action" class="nav-link">90-Day Plan</a>
+    <a href="index.html#important" class="nav-link">Key Docs</a>
+    <a href="index.html#helpful" class="nav-link">Resources</a>
+  </div>
+</nav>
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Area Development Day</div>
+  <div class="section-tag">Section II &middot; Key Document</div>
+  <h1>Area Development Day</h1>
+  <p>A prescriptive process for strategic planning in the Young Life Area &mdash; including a preparation timeline and a full sample agenda for the day.</p>
+</div>
+<main>
+<a href="index.html" class="back-link">&larr; Back to Onboarding Home</a>
+<div class="content-card">
+  <h2>Overview</h2>
+  <p>Area Development Day (ADD) is a prescriptive process for strategic planning in the Young Life Area. It typically runs about 6 hours and brings together staff, key volunteers, and committee members to produce a clear, actionable strategic plan for the next 6&ndash;18 months.</p>
+</div>
+<div class="content-card">
+  <h2>Preparation Timeline</h2>
+  <div class="timeline-item">
+    <div class="timeline-dot">8wk</div>
+    <div class="timeline-content">
+      <h4>Guest List (8 Weeks Out)</h4>
+      <p>Compile and send invitations to all stakeholders: all staff, key volunteers (e.g. volunteer team leaders), and committee members. May also include key donors, church partners, ex-staff, or ex-volunteers. The invite should come from the Committee Chair or Area Director and be preceded or followed up with a phone call.</p>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-dot">2wk</div>
+    <div class="timeline-content">
+      <h4>Included in the Invitation (2 Weeks Out)</h4>
+      <ul>
+        <li>RSVP for the event (Google Form) &mdash; <em>request completion 2 weeks prior</em></li>
+        <li>Link to CliftonStrengths Assessment &mdash; <em>complete at least one week out</em></li>
+        <li>SWOT Analysis (Google Form)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-dot">1wk</div>
+    <div class="timeline-content">
+      <h4>One Week Out</h4>
+      <p>CliftonStrengths results submitted to AD or Area Admin, inserted into a spreadsheet, and printed for distribution at the event. Facilitator reviews SWOT results with AD and Committee Chair, taking a first pass at prioritizing goals. SWOT organized by the Five Core Functions.</p>
+    </div>
+  </div>
+</div>
+<div class="content-card">
+  <h2>SWOT Analysis</h2>
+  <p>Participants complete a Google Form providing feedback on <strong>S</strong>trengths, <strong>W</strong>eaknesses, <strong>O</strong>pportunities, and <strong>T</strong>hreats in advance. It is helpful to have this done before the event but it can be updated, changed, or refined on the day of. Once completed, the facilitator organizes the SWOT by Young Life&rsquo;s Five Core Functions:</p>
+  <ul>
+    <li>Direct Ministry</li>
+    <li>Leadership Development</li>
+    <li>Spiritual Development</li>
+    <li>Resource Development</li>
+    <li>Ministry Support</li>
+  </ul>
+</div>
+<div class="content-card">
+  <h2>CliftonStrengths at the ADD</h2>
+  <p>The purpose of reviewing the team&rsquo;s strengths is to evaluate where relative strengths lie within the group. It is not uncommon to see &ldquo;clumps&rdquo; of strengths within the four different strength domains. It might also illuminate where someone is serving in an area that doesn&rsquo;t suit them &mdash; and where they could serve in a different capacity more aligned to their gifting. It could also uncover opportunities to recruit new volunteers that fill a gap.</p>
+  <p>Prior to the event, the Area Director, Committee Chair, and facilitator will meet to discuss observations and reflections related to the group. On the day of the event, after reviewing the SWOT analysis, attendees will be broken into working groups based on their strengths.</p>
+</div>
+<div class="content-card">
+  <h2>Sample Day-of Agenda</h2>
+  <div class="agenda-row">
+    <div class="agenda-time">1:00 PM</div>
+    <div class="agenda-desc"><h4>Arrive</h4><p>Host provides snacks and drinks.</p></div>
+  </div>
+  <div class="agenda-row">
+    <div class="agenda-time">1:30</div>
+    <div class="agenda-desc"><h4>Welcome &amp; Set Up the Time</h4><p>AD or Facilitator shares a short area perspective.</p></div>
+  </div>
+  <div class="agenda-row">
+    <div class="agenda-time">1:45</div>
+    <div class="agenda-desc">
+      <h4>Survey the Wall / Time to Lament</h4>
+      <p>AD, CC, or Other Staff lead. Words to describe teenagers in the area &mdash; an important time to understand the state of the adolescent world and culture locally. <strong>Pray!</strong></p>
+    </div>
+  </div>
+  <div class="agenda-row">
+    <div class="agenda-time">2:00</div>
+    <div class="agenda-desc">
+      <h4>Review SWOT</h4>
+      <p>Facilitator leads. Walk around and review the SWOT results:</p>
+      <ul><li>Additions</li><li>Deletions</li><li>Clarifications</li></ul>
+    </div>
+  </div>
+  <div class="agenda-row">
+    <div class="agenda-time">2:30</div>
+    <div class="agenda-desc"><h4>Break</h4></div>
+  </div>
+  <div class="agenda-row">
+    <div class="agenda-time">2:45</div>
+    <div class="agenda-desc"><h4>Pray &mdash; Ask the Lord to Lead</h4><p>AD or CC leads.</p></div>
+  </div>
+  <div class="agenda-row">
+    <div class="agenda-time">3:00</div>
+    <div class="agenda-desc"><h4>Voting</h4><p>Facilitator leads participants in voting on priorities.</p></div>
+  </div>
+  <div class="agenda-row">
+    <div class="agenda-time">3:30</div>
+    <div class="agenda-desc"><h4>Review Strengths Grid</h4><p>AD, CC, or Facilitator. Determine and assign working groups based on strengths.</p></div>
+  </div>
+  <div class="agenda-row">
+    <div class="agenda-time">4:00</div>
+    <div class="agenda-desc">
+      <h4>Break into Working Groups Around Objectives &#x2605;</h4>
+      <p><em>This is the bulk of the time &mdash; the most important section.</em> Each group works to:</p>
+      <ul>
+        <li>Determine Priority / Goal / Benchmarks</li>
+        <li>Create an Action Plan</li>
+        <li>Identify who else in the community can help</li>
+        <li>Set next meeting date</li>
+      </ul>
+    </div>
+  </div>
+  <div class="agenda-row">
+    <div class="agenda-time">5:00</div>
+    <div class="agenda-desc"><h4>Reconvene &amp; Share Objectives / Action Plans</h4><p>All working groups share back with the full group.</p></div>
+  </div>
+  <div class="agenda-row">
+    <div class="agenda-time">5:30</div>
+    <div class="agenda-desc"><h4>Adjourn</h4><p>Depending on the day, you may also want to meet over lunch or dinner &mdash; adjust the schedule accordingly to allow more time for serving, visiting, or reflecting on the events of the day.</p></div>
+  </div>
+</div>
+</main>
+<footer><strong>Young Life &middot; Front Range Region</strong><br>New Committee Chair Onboarding &middot; Eastern Colorado &amp; Southern Wyoming<br>Questions? Contact <a href="mailto:kristendawnyl@gmail.com">Kristen Martinez</a> in the Regional Office</footer>
+</body>
+</html>
