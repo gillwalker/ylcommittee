@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Town, Our Kids | Young Life Front Range Region</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yl-navy: #1a2f4e;
+    --yl-green: #6ab42b;
+    --yl-green-dark: #4e8a1a;
+    --yl-gold: #e8a020;
+    --yl-light: #f5f7f2;
+    --yl-white: #ffffff;
+    --yl-gray: #6b7280;
+    --yl-border: #dde8d0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--yl-light);
+    color: var(--yl-navy);
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--yl-navy);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(26,47,78,0.25);
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .nav-logo-dot {
+    width: 32px; height: 32px;
+    background: var(--yl-green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    color: white;
+    font-size: 14px;
+    letter-spacing: -1px;
+  }
+  .nav-title {
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  .nav-sub { color: var(--yl-green); font-weight: 300; font-size: 0.72rem; display: block; }
+  nav a.nav-link {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  nav a.nav-link:hover { color: var(--yl-green); border-bottom-color: var(--yl-green); }
+  .nav-links { display: flex; gap: 2rem; }
+  @media (max-width: 720px) { .nav-links { display: none; } }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--yl-navy) 0%, #243d5e 60%, #1f3a56 100%);
+    padding: 60px 2rem 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(106,180,43,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero-book-cover {
+    flex: 0 0 160px;
+  }
+  .hero-book-cover a { display: block; }
+  .hero-book-cover img {
+    width: 160px;
+    border-radius: 8px;
+    box-shadow: 8px 12px 36px rgba(0,0,0,0.4);
+    display: block;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .hero-book-cover a:hover img {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 10px 16px 44px rgba(0,0,0,0.5);
+  }
+  .hero-text { flex: 1 1 320px; }
+  .hero-eyebrow {
+    display: inline-block;
+    background: rgba(106,180,43,0.15);
+    border: 1px solid rgba(106,180,43,0.35);
+    color: var(--yl-green);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: white;
+    line-height: 1.12;
+    margin-bottom: 10px;
+  }
+  .hero h1 em { color: var(--yl-green); font-style: normal; }
+  .hero-subtitle {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.95rem;
+    font-weight: 300;
+    margin-bottom: 24px;
+    letter-spacing: 0.03em;
+  }
+  .hero-pullquote {
+    background: rgba(255,255,255,0.06);
+    border-left: 3px solid var(--yl-green);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.6;
+  }
+  .hero-pullquote cite {
+    display: block;
+    font-style: normal;
+    font-size: 0.78rem;
+    color: var(--yl-green);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* BREADCRUMB */
+  .breadcrumb {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 18px 2rem 0;
+    font-size: 0.8rem;
+    color: var(--yl-gray);
+  }
+  .breadcrumb a { color: var(--yl-green-dark); text-decoration: none; font-weight: 600; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb span { margin: 0 6px; color: var(--yl-border); }
+
+  /* MAIN */
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 2rem 80px;
+  }
+
+  .content-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--yl-border);
+    padding: 40px 44px;
+    box-shadow: 0 2px 16px rgba(26,47,78,0.08);
+    margin-bottom: 24px;
+  }
+
+  .content-card p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #374151;
+    margin-bottom: 1.2em;
+  }
+  .content-card p:last-child { margin-bottom: 0; }
+
+  .content-card ul {
+    list-style: none;
+    margin: 0 0 1.2em 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .content-card ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 1rem;
+    color: #374151;
+    line-height: 1.6;
+  }
+  .bullet-dot {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--yl-light);
+    border: 1.5px solid var(--yl-border);
+    color: var(--yl-green-dark);
+    font-size: 0.65rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .content-card a { color: var(--yl-green-dark); font-weight: 600; text-decoration: none; }
+  .content-card a:hover { text-decoration: underline; }
+
+  .cta-line {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--yl-navy);
+    margin-top: 0.4em;
+  }
+
+  /* DIVIDER */
+  .section-rule {
+    border: none;
+    border-top: 1px solid var(--yl-border);
+    margin: 32px 0;
+  }
+
+  /* AUTHOR BLOCK */
+  .author-section-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--yl-green);
+    margin-bottom: 18px;
+  }
+  .author-block {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .author-photo img {
+    width: 130px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(26,47,78,0.12);
+    display: block;
+  }
+  .author-bio { flex: 1 1 260px; }
+  .author-bio p {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: #374151;
+    margin-bottom: 0.9em;
+  }
+  .author-bio p:last-child { margin-bottom: 0; }
+  .author-bio a { color: var(--yl-green-dark); font-weight: 600; text-decoration: none; }
+  .author-bio a:hover { text-decoration: underline; }
+
+  /* FOOTER */
+  footer {
+    background: var(--yl-navy);
+    color: rgba(255,255,255,0.55);
+    text-align: center;
+    padding: 36px 2rem;
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+  footer strong { color: white; }
+  footer a { color: var(--yl-green); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .content-card { padding: 28px 22px; }
+    .hero-book-cover { flex: 0 0 120px; }
+    .hero-book-cover img { width: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-logo-dot">YL</div>
+    <div class="nav-title">
+      Front Range Region
+      <span class="nav-sub">Young Life</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="index.html#action" class="nav-link">90-Day Plan</a>
+    <a href="index.html#important" class="nav-link">Key Docs</a>
+    <a href="index.html#helpful" class="nav-link">Resources</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-book-cover">
+      <a href="https://www.amazon.com/Our-Town-Kids-Eric-Protzman/dp/1959099280" target="_blank" rel="noopener">
+        <img src="book-cover.png" alt="Our Town, Our Kids book cover" />
+      </a>
+    </div>
+    <div class="hero-text">
+      <div class="hero-eyebrow">Featured Book</div>
+      <h1><em>Our Town,</em><br>Our Kids</h1>
+      <p class="hero-subtitle">Reimagining Your Young Life Area &nbsp;·&nbsp; Foreword by Andy Morman</p>
+      <div class="hero-pullquote">
+        "Might be the most important book in Young Life in the last twenty-five years…"
+        <cite>— Brent Cunningham, Area Developer, rural Alaska</cite>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="index.html">← Back to Onboarding Home</a>
+  <span>/</span>
+  Important Links
+  <span>/</span>
+  Our Town, Our Kids
+</div>
+
+<main>
+
+  <div class="content-card">
+    <p>Eric Protzman chaired the Young Life committee and Andy Morman served as the Area Director. When they began their journey together, they brimmed with confidence and trust.</p>
+
+    <p>In just a few years, they couldn't stand each other, and their Young Life Area struggled because of it.</p>
+
+    <p>In <em>Our Town, Our Kids</em>, Eric Protzman shares the lessons he and Andy learned as they forged a trusting friendship and developed a model for healthy Young Life Areas. In his thought-provoking book, you'll learn how to:</p>
+
+    <ul>
+      <li><span class="bullet-dot">●</span>Honor Young Life and YL staff</li>
+      <li><span class="bullet-dot">●</span>Avoid outsourcing your kids' salvation</li>
+      <li><span class="bullet-dot">●</span>Wage war on staff fear and loneliness</li>
+    </ul>
+
+    <p class="cta-line">Reimagine your Young Life Area!</p>
+
+    <p>Buy a copy of <a href="https://www.amazon.com/Our-Town-Kids-Eric-Protzman/dp/1959099280" target="_blank" rel="noopener">Our Town Our Kids</a> by Eric Protzman.</p>
+
+    <hr class="section-rule" />
+
+    <!-- Author photo placed above final paragraph per instructions -->
+    <div class="author-section-label">About the Author</div>
+    <div class="author-block">
+      <div class="author-photo">
+        <img src="eric-photo.jpg" alt="Eric Protzman holding his book" />
+      </div>
+      <div class="author-bio">
+        <p><strong>Eric Protzman</strong> has served YL as a Volunteer Leader, Committee Chair, Bible instructor, Regional Board Chair, and Divisional Board Chair. Today, he mentors Young Life Areas and Staff. Eric lives in Colorado with his wife, Nancy, surrounded by their nearby children and grandchildren.</p>
+        <p>To inquire about Eric speaking to your group, visit <a href="https://ericprotzmanauthor.com" target="_blank">ericprotzmanauthor.com</a>.</p>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <strong>Young Life Committees</strong><br>
+  Questions? Contact <a href="mailto:gill@teamrichard.com">Gill Richard</a>
+</footer>
+
+</body>
+</html>
