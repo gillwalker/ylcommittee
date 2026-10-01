@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#1a2f4e">
+<title>South Jeffco Committee | Young Life Front Range Region</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+</head>
+<body>
+<nav>
+  <a href="/index.html" class="nav-brand">
+    <div class="nav-logo-dot">YL</div>
+    <div class="nav-title">Front Range Region<span class="nav-sub">Young Life</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="/index.html" class="nav-link">Home</a>
+    <a href="./" class="nav-link">South Jeffco Roles</a>
+    <a href="./#map" class="nav-link">Map</a>
+    <a href="roles.pdf" class="nav-link" download>Download PDF</a>
+    <a href="#" class="nav-link" data-get-involved="">Get Involved</a>
+  </div>
+</nav>
+<div class="page-hero">
+  <div class="breadcrumb"><a href="/index.html">Home</a> &rsaquo; South Jeffco</div>
+  <div class="section-tag">South Jefferson County &middot; Committee</div>
+  <h1>Join the South Jeffco Young Life Committee</h1>
+  <p>Our committee is a group of local adults who come alongside our staff and volunteer leaders so more kids in South Jeffco can meet Jesus. Click any role to read the full description.</p>
+  <div class="hero-actions">
+    <a href="#" class="btn btn-primary" data-get-involved="">Get Involved</a>
+    <a href="roles.pdf" class="btn btn-ghost" download>&#x2193; Download All Roles (PDF)</a>
+  </div>
+</div>
+<main>
+
+<div class="intro-split" id="intro-split">
+<figure class="photo-card" id="intro-photo">
+  <img src="committee.jpg" width="1600" height="1107" alt="Members of the South Jeffco Young Life committee">
+</figure>
+<div class="intro-card" id="intro-text">
+  <p>Each local Young Life area has a committee of adults who believe in the mission of Young Life: to introduce adolescents to Jesus Christ and to help them grow in their faith. You'll find adults from all different backgrounds, careers and churches, including lots of moms and dads who care deeply about kids.</p>
+  <p>Committees pray faithfully for kids and for Young Life, plan events like fundraisers and community socials, build relationships across the community, and support the staff and area director. The best and most fulfilling committee work happens <em>outside</em> of the monthly meeting &mdash; through these focused subcommittee roles.</p>
+</div>
+</div>
+
+<section class="map-card" id="map" aria-labelledby="map-title">
+  <div class="map-head">
+    <h2 id="map-title">Where We Serve</h2>
+    <p>South Jeffco Young Life serves students at these schools in Lakewood, Littleton and Ken Caryl. Tap a pin or a school name for details.</p>
+  </div>
+  <div class="map-body">
+    <div id="area-map" role="region" aria-label="Map of South Jeffco Young Life schools"></div>
+    <div class="map-list" id="area-map-list"></div>
+  </div>
+</section>
+
+<div class="roles-list">
+    <a href="leader-care-hospitality.html" class="role-card">
+      <div class="role-icon">❤️</div>
+      <div class="role-body">
+        <h3>Leader Care &amp; Hospitality</h3>
+        <p>Ensures that staff and volunteers receive the care, support and hospitality they need to be effective in the area mission to reach kids.</p>
+      </div>
+      <div class="role-arrow">&rarr;</div>
+    </a>
+    <a href="prayer-team.html" class="role-card">
+      <div class="role-icon">🙏</div>
+      <div class="role-body">
+        <h3>Prayer Team</h3>
+        <p>Collects prayer requests from the local area staff and volunteers and prays together on a regular basis.</p>
+      </div>
+      <div class="role-arrow">&rarr;</div>
+    </a>
+    <a href="events.html" class="role-card">
+      <div class="role-icon">🎉</div>
+      <div class="role-body">
+        <h3>Events</h3>
+        <p>Plans and executes fundraising events (banquet, golf tournament) in cooperation with staff and volunteers to raise financial support for the area.</p>
+      </div>
+      <div class="role-arrow">&rarr;</div>
+    </a>
+    <a href="resource-development.html" class="role-card">
+      <div class="role-icon">🤝</div>
+      <div class="role-body">
+        <h3>Resource Development</h3>
+        <p>Engages with local community groups and businesses to develop partnerships and drive forward the area's strategic vision.</p>
+      </div>
+      <div class="role-arrow">&rarr;</div>
+    </a>
+</div>
+
+<div class="cta-card">
+  <div>
+    <h2>Ready to get involved?</h2>
+    <p>Pick one role or several. Our area director will reach out to talk through next steps.</p>
+  </div>
+  <a href="#" class="btn btn-primary" data-get-involved="">Get Involved</a>
+</div>
+
+</main>
+<footer><strong>Young Life South Jeffco</strong> &middot; Front Range Region<br>
+Questions? Contact <a href="mailto:gill@teamrichard.com">Gill Richard</a></footer>
+<script src="intro-balance.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="area-map.js"></script>
+<script src="signup.js"></script>
+</body>
+</html>
