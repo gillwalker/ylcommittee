@@ -5,7 +5,7 @@
 (function () {
   var AREA = "southjeffco";
   var AREA_NAME = "South Jeffco";
-  var ROLES = ["Leader Care & Hospitality", "Prayer Team", "Events", "Resource Development"];
+  var ROLES = ["Leader Care & Hospitality", "Prayer Team", "Events", "Resource Development", "Ministry Admin Support"];
   // Shared sign-up Worker for all area pages.
   var ENDPOINT = "https://yl-area-signup.gill-ec1.workers.dev/";
   var CONTACT = "gill@teamrichard.com";
